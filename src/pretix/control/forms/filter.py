@@ -1049,6 +1049,7 @@ class CustomerFilterForm(FilterForm):
             qs = qs.filter(
                 Q(email__icontains=query)
                 | Q(name_cached__icontains=query)
+                | Q(identifier__istartswith=query)
             )
 
         if fdata.get('ordering'):
