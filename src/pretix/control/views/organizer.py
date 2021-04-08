@@ -1623,6 +1623,11 @@ class MembershipTypeCreateView(OrganizerDetailViewMixin, OrganizerPermissionRequ
             'organizer': self.request.organizer.slug,
         })
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['event'] = self.request.organizer
+        return kwargs
+
     def form_valid(self, form):
         messages.success(self.request, _('The membership type has been created.'))
         form.instance.organizer = self.request.organizer
@@ -1651,6 +1656,11 @@ class MembershipTypeUpdateView(OrganizerDetailViewMixin, OrganizerPermissionRequ
         return reverse('control:organizer.membershiptypes', kwargs={
             'organizer': self.request.organizer.slug,
         })
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['event'] = self.request.organizer
+        return kwargs
 
     def form_valid(self, form):
         if form.has_changed():
