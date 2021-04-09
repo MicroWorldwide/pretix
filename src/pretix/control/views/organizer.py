@@ -1759,7 +1759,7 @@ class CustomerDetailView(OrganizerDetailViewMixin, OrganizerPermissionRequiredMi
 
         for m in ctx['memberships']:
             if m.membership_type.max_usages:
-                m.percent = m.usage / m.membership_type.max_usages
+                m.percent = int(m.usages / m.membership_type.max_usages * 100)
             else:
                 m.percent = 0
 
